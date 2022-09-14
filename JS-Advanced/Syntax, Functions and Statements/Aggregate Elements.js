@@ -1,17 +1,17 @@
 function aggregate(line)
 {
-    let numbers = line.split(/[\[\]]/).toString();
-    let actualNumbers = numbers.split(",");
-    console.log(actualNumbers.sum());
-    let sumInverse = numbers.array.forEach(element => 
+   let concat = "";
+   let sum =0;
+   let sumInverse = 0;
+    for(let i =0; i < line.length;i++)
     {
-        element =  1/Number(element);
-    });
-    console.log(sumInverse.sum());
-    let concatAnswer = numbers.array.forEach(element =>
-    {
-        element +=element;
-    });
+        concat+=line[i];
+        sum+= Number(line[i]);
+        sumInverse+=1/Number(line[i]);
+    }
+    console.log(sum);
+    console.log(sumInverse);
+    console.log(concat);
 
 }
-aggregate("[1, 2, 3]");
+aggregate([1, 2, 3]);
