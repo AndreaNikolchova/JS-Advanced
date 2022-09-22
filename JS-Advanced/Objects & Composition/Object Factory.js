@@ -3,7 +3,7 @@ function factory(library, orders){
     result =[];
    for(let order of orders){
         let obj={};
-        obj.name = order.template;
+        obj.name = order.template.name;
         for(let part of order.parts)
         {
             obj[part] = library[part];
