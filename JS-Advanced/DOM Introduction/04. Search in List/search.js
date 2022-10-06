@@ -2,7 +2,7 @@ function search() {
    let list = document.getElementsByTagName('li');
    for(let word of list){
       word.style.textDecoration= 'none';
-      word.innerHTML = `${word.textContent}`;
+      word.style.fontWeight = 'none';
 
    }
    let input = document.getElementsByTagName('input')[0].value;
@@ -13,7 +13,7 @@ function search() {
       let str = word.textContent;
       if(str.match(input)){
         word.style="text-decoration: underline"
-      word.innerHTML = `<b>${word.textContent}</b>`;
+         word.style.fontWeight = "bold";
         count++;
       }
    }
