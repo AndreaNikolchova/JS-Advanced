@@ -16,19 +16,19 @@ class Stringer{
         }
     }
     toString(){
-        //if(this.innerLength === 0){
-        //    return '...'
-       // }
-       // else{
-           // let string = this.innerString;
-           // if(string.length <= this.innerLength){
-              // return string;
-           // }
-           /// else{
-                let result = this.innerString.substring(0,this.innerLength);
+        if(this.innerLength === 0){
+            return '...'
+        }
+        else{
+            let string = this.innerString;
+            if(string.length <= this.innerLength){
+                return string;
+            }
+            else{
+                let result = string.substring(0,this.innerLength);
                 return result+'...';
-           // }
-        
+            }
+        }
     }
 }
 let test = new Stringer("Test", 5);

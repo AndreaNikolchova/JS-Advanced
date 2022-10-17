@@ -1,30 +1,61 @@
-const {expect} = require('chai');
+const {assert} = require('chai');
 const {isSymmetric} = require('../Check for Symmetry');
-describe('isSymmetric',()=>{
-    it("argument if it isn't an array",()=>{
-        let argument = 'str';
-        expect(isSymmetric(argument)).to.be.equal(false);
-    }),
-    it("argument if it isn't an array",()=>{
-        let argument = 1;
-        expect(isSymmetric(argument)).to.be.equal(false);
-    }), 
-    it("argument if it isn't an array",()=>{
-        let argument = undefined;
-        expect(isSymmetric(argument)).to.be.equal(false);
-    }),
-     it("argument if it isn't symmetric",()=>{
-        let argument = [1,2,3,4,2,1];
-        expect(isSymmetric(argument)).to.be.equal(false);
-    }),
-    it("argument if it is symmetric",()=>{
-        let argument = [1,2,2,1];
-        expect(isSymmetric(argument)).to.be.equal(true);
-    }),
-    it('Array',()=>{
-        let argument = ['1','2','2','1'];
-        expect(isSymmetric(argument)).to.be.equal(true);
-    })
-})
+
+describe('test isSymmetric function',()=>{
+    describe('incorrect input',()=>{
+        it("if argument is string",()=>{
+            let argument = 'str';
+            assert.equal(isSymmetric(argument),false);
+        });
+        it("if argument is a number",()=>{
+            let argument = 1;
+            assert.equal(isSymmetric(argument),false);
+        });
+        it("if argument is undefined",()=>{
+            let argument = undefined;
+            assert.equal(isSymmetric(argument),false);
+        });
+        it("if argument is an object",()=>{
+            let argument = {};
+            assert.equal(isSymmetric(argument),false);
+        });
+        it("if argument is a bool",()=>{
+            let argument = true;
+            assert.equal(isSymmetric(argument),false);
+        });
+        it("if argument is null",()=>{
+            let argument = null;
+            assert.equal(isSymmetric(argument),false);
+        });
+
+    });
+    describe('test with array',()=>{
+        it('array that is not symmetric numbers',()=>{
+            let argument = [1,2,3,4,2,1];
+            assert.equal(isSymmetric(argument),false);
+        });
+        it('array that is symmetric numbers',()=>{
+            let argument = [1,2,3,3,2,1];
+            assert.equal(isSymmetric(argument),true);
+        });
+        it('array that is not symmetric string',()=>{
+            let argument = ['1','2','3','4','2','1'];
+            assert.equal(isSymmetric(argument),false);
+        });
+        it('array that is symmetric string',()=>{
+            let argument = ['1','2','3','3','2','1'];
+            assert.equal(isSymmetric(argument),true);
+        });
+        it('array that is symmetric mixed',()=>{
+            let argument = ['1',2,'3','3',2,'1'];
+            assert.equal(isSymmetric(argument),true);
+        });
+        it('array that is not  symmetric mixed',()=>{
+            let argument = ['1',2,'3','3',2,'1'];
+            assert.equal(isSymmetric(argument),true);
+        });
+    });
+
+});
     
 

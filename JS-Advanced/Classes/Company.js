@@ -19,20 +19,71 @@ class Company{
         salary<0){
             throw new Error('Invalid input!');
         }
-        this.departments[department] = {name,position,salary};
+        if(this.departments[department]===undefined){
+            this.departments[department]={
+                averageSalary: 0
+            };
+            this.departments[department][name] = {
+                salary:salary,
+                position:position
+            };
+
+        }
+        else{
+            this.departments[department][name] = {
+                salary:salary,
+                position:position
+            };
+
+        }
         return `New employee is hired. Name: ${name}. Position: ${position}`
 
     }
     bestDepartment(){
-        
+        let count = 0;
+        for(let dep in this.departments){
+            count = 0;
+          for(let employee in this.departments[dep]){
+            if(employee !== 'averageSalary'){
+                this.departments[dep].averageSalary += Number(this.departments[dep][employee].salary);
+                count++;
+            }
+        }
+        this.departments[dep].averageSalary= Math.round(this.departments[dep].averageSalary/count);
+        }
+        let max = -10;
+        let resultObj = {};
+        for(let dep in this.departments){
+            if( this.departments[dep].averageSalary > max){
+                resultObj[dep] = this.departments[dep];
+                max =  this.departments[dep].averageSalary;
+            }
+        }
+        let string = '';
+        let countEmp =1;
+        let result =[];
+        for(let employee in resultObj){
+            string +=`Best Department is: ${employee}${'\n'}`;
+            for(let emp in resultObj[employee]){
+                if(countEmp === 1){
+                    string+= `Average salary: ${Number(resultObj[employee][emp]).toFixed(2)}${'\n'}`;
+                }
+                else{
+                    let obj = {
+                        name:emp,
+                        salary:resultObj[employee][emp].salary,
+                        position: resultObj[employee][emp].position
+
+                    }
+                    result.push(obj);
+                }
+                countEmp++;
+        }
+    }
+        result.sort((a,b)=>b.salary-a.salary||a.name.localeCompare(b.name));
+        for(let emp of result){
+            string+= `${emp.name} ${emp.salary} ${emp.position}${'\n'}`;
+        }
+        return string.trimEnd();
     }
 }
-let c = new Company();
-c.addEmployee("Stanimir", 2000, "engineer", "Construction");
-c.addEmployee("Pesho", 1500, "electrical engineer", "Construction");
-c.addEmployee("Slavi", 500, "dyer", "Construction");
-c.addEmployee("Stan", 2000, "architect", "Construction");
-c.addEmployee("Stanimir", 1200, "digital marketing manager", "Marketing");
-c.addEmployee("Pesho", 1000, "graphical designer", "Marketing");
-c.addEmployee("Gosho", 1350, "HR", "Human resources");
-console.log(c.bestDepartment());

@@ -1,32 +1,30 @@
 function checkIfMatrixIsMagical(matrix){
-function sum(arr){
     let sum = 0;
-    for(let num of arr){
-        sum+=Number(num);
+    let helper = 0;
+    for(let row = 0; row<matrix.length;row++){
+        for(let col = 0; col<matrix.length;col++){
+            helper+= matrix[row][col];
+        }
+        if(row === 0){
+            sum = helper;
+        }
+        if(helper !== sum){
+            return false;
+        }
+        helper = 0;
     }
-    return sum;
-}
-let sumCol = 0;
-    let sumWanted = sum(matrix[0]);
-
- for(let rows = 0; rows< matrix[0].length; rows++){
-    if(sumWanted !== sum(matrix[rows])){
-        return false;
+    for(let col = 0; col<matrix.length;col++){
+        for(let row = 0; row<matrix.length;row++){
+            helper+= matrix[row][col];
+        }
+        if(helper !== sum){
+            return false;
+        }
+        helper = 0;
     }
-    for(let cols = 0 ; cols<matrix[0].length;cols++){
-        sumCol+=matrix[rows][cols];
-    }
-    
-    if(sumWanted !== sumCol){
-        return false;
-    }
-    sumCol =0;
-    
- }
- return true;
+    return true;
 }
 console.log(checkIfMatrixIsMagical([[1, 0, 0],
     [0, 0, 1],
     [0, 1, 0]]
-   
    ));
