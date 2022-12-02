@@ -1,6 +1,6 @@
 import { getUserData } from "../utilities.js";
 
-const host = 'http://localhost:3033';
+const host = 'http://localhost:3030';
 
 async function request(method,url,data){
     const options ={
